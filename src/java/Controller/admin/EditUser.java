@@ -29,6 +29,7 @@ public class EditUser extends HttpServlet {
             throws ServletException, IOException {
         // Lấy thông tin username từ tham số trên URL
         String username = request.getParameter("username");
+        
 
         // Lấy thông tin người dùng từ cơ sở dữ liệu
         User user = null;

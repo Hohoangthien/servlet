@@ -21,7 +21,7 @@
                 <a class="nav-link active" aria-current="page" href="<%=request.getContextPath()%>/admin/listUser">Danh sách người dùng</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<%=request.getContextPath()%>/admin/listSach">Danh sách sách</a> 
+                <a class="nav-link" href="<%=request.getContextPath()%>/admin/list-sach.jsp">Danh sách sách</a> 
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="<%=request.getContextPath()%>/admin/listTacGia">Danh sách tác giả</a>

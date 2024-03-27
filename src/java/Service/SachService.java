@@ -77,6 +77,7 @@ public class SachService {
         }
         return sachs;
     }
+
     public static List<Sach> getAllSachDeleted() throws SQLException, ClassNotFoundException {
         DatabaseManager connectJDBC = new DatabaseManager();
         Connection conn = connectJDBC.connect();
@@ -93,7 +94,8 @@ public class SachService {
         }
         return sachs;
     }
-     public static List<Sach> getAllSachNoDeleted() throws SQLException, ClassNotFoundException {
+
+    public static List<Sach> getAllSachNoDeleted() throws SQLException, ClassNotFoundException {
         DatabaseManager connectJDBC = new DatabaseManager();
         Connection conn = connectJDBC.connect();
         PreparedStatement stmt = conn.prepareStatement("select * from sach where (is_deleted = '0')");
@@ -200,7 +202,39 @@ public class SachService {
         return false;
     }
 
+    public static ArrayList<Sach> Search(String noidung) {
+        try {
+            ArrayList<Sach> list = new ArrayList<>();
+            DatabaseManager connectJDBC = new DatabaseManager();
+            Connection conn = connectJDBC.connect();
+            try {
+                PreparedStatement stmt = conn.prepareStatement("select * FROM sach where ten_sach like ?");
+                stmt.setString(1, "%" + noidung + "%");
+                ResultSet rs = stmt.executeQuery();
+                while (rs.next()) {
+                    list.add(new Sach(
+                            rs.getInt("ma_sach"),
+                            rs.getString("ten_sach"),
+                            findTacGiaById(rs.getInt("ma_tg")),
+                            rs.getInt("giatien")));
+                }
+                return list;
+            } catch (SQLException ex) {
+                Logger.getLogger(SachService.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            return list;
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(SachService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        addSach("Test", 9, 20000);
+
+        List<Sach> l = Search("harr");
+        for (Sach i : l) {
+            System.out.println(i.toString());
+        }
     }
 }

@@ -15,7 +15,7 @@
         <h1>Thêm tác giả</h1>
         <form action="/qlthuvien2/admin/addTacGia" method="post" enctype="multipart/form-data" charset="UTF-8">            
             <label for="tensach">Tên tác giả:</label> 
-            <input type="text" name="tentg" id="tentg" placeholder="Nhập tên tác giả" required ><br>
+            <input type="text" name="tentg" id="tentg" placeholder="Nhập tên tác giả" required >
             <br>
             <input type="submit" value="Thêm tác giả">
         </form>

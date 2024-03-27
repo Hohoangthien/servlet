@@ -69,4 +69,10 @@ public class Sach {
     public void setGiatien(int giatien) {
         this.giatien = giatien;
     }
+
+    @Override
+    public String toString() {
+        return maSach + " " + tenSach;
+    }
+
 }

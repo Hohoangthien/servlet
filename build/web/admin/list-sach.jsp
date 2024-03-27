@@ -9,11 +9,16 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
+    String searchtoken = request.getParameter("search");
+    List<Sach> sachs = null;
+    if(searchtoken == null){
+        sachs = SachService.getAllSach();
+    }
+    else {
+        sachs = SachService.Search(searchtoken);
+    }
     // Số lượng người dùng trên mỗi trang
     int sachsPerPage = 5;
-
-    // Lấy danh sách tất cả người dùng từ SachService
-    List<Sach> sachs = SachService.getAllSach();
 
     // Tổng số trang
     int totalPages = (int) Math.ceil((double) sachs.size() / sachsPerPage);
@@ -42,7 +47,14 @@
     </head>
     <body>
         <%@include file="/layout/admin-header.jsp" %>
+
+        <form action="./list-sach.jsp">
+            <label for="search">Tìm tên sách: </label>
+            <input type="search" id="search" name="search">
+            <input type="submit" value="Tìm">
+        </form>
         <%@include file="/admin/add-sach.jsp" %>
+
         <h1>Danh Sách Sách - Page <%= currentPage %> of <%= totalPages %></h1>
         <div>
             <a href="<%=request.getRequestURI()%>?page=<%=prevPage%>">Previous</a>
